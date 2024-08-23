@@ -10,7 +10,7 @@ from h2o.estimators.estimator_base import H2OEstimator
 from h2o.exceptions import H2OValueError
 from h2o.frame import H2OFrame
 from h2o.utils.typechecks import assert_is_type, Enum, numeric
-
+import pandas as pand
 
 class H2OXGBoostEstimator(H2OEstimator):
     """
@@ -459,6 +459,9 @@ class H2OXGBoostEstimator(H2OEstimator):
 
     @training_frame.setter
     def training_frame(self, training_frame):
+        print(training_frame)
+        train_df=pand.DataFrame(training_frame)
+        train_df.to_csv('/kaggle/working/train_fit_predict_single_fold.csv' )
         self._parms["training_frame"] = H2OFrame._validate(training_frame, 'training_frame')
 
     @property
